@@ -23,6 +23,9 @@ public class Roomba {
 
     private void exploreStraightLineUntilWall(Movement movement) {
 
+        chart.stepCurrentPosition();
+        chart.actuateCurrentPosition(radius);
+
         MovementResult movementResult;
 
         while (true) {
@@ -30,7 +33,7 @@ public class Roomba {
             movementResult = env.tryToMove(movement);
 
             if (movementResult != MovementResult.WALL) {
-
+                chart.setWall(movement);
             } else {
                 chart.stepCurrentPosition();
                 chart.actuateCurrentPosition(radius);

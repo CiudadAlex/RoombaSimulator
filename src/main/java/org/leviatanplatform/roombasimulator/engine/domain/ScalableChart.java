@@ -62,6 +62,19 @@ public class ScalableChart {
         }
     }
 
+    public void setWall(Movement movement) {
+
+        Position positionOfWall = switch (movement) {
+            case UP -> new Position(position.getRow() - 1, position.getColumn());
+            case DOWN -> new Position(position.getRow() + 1, position.getColumn());
+            case LEFT -> new Position(position.getRow(), position.getColumn() - 1);
+            case RIGHT -> new Position(position.getRow(), position.getColumn() + 1);
+        };
+
+        Cell wallCell = chart[positionOfWall.getRow()][positionOfWall.getColumn()];
+        wallCell.setWall(true);
+    }
+
     private void setPosition(int row, int column) {
         this.position = new Position(row, column);
     }
