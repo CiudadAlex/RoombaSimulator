@@ -18,30 +18,27 @@ public class Roomba {
     }
 
     public void explore() {
+
+        exploreStraightLineUntilWall(Movement.UP);
+
         // FIXME finish
     }
 
     private void exploreStraightLineUntilWall(Movement movement) {
 
-        chart.stepCurrentPosition();
-        chart.actuateCurrentPosition(radius);
-
-        MovementResult movementResult;
-
         while (true) {
 
-            movementResult = env.tryToMove(movement);
+            chart.stepCurrentPosition();
+            chart.actuateCurrentPosition(radius);
 
-            if (movementResult != MovementResult.WALL) {
+            MovementResult movementResult = env.tryToMove(movement);
+
+            if (movementResult == MovementResult.WALL) {
                 chart.setWall(movement);
+                break;
             } else {
-                chart.stepCurrentPosition();
-                chart.actuateCurrentPosition(radius);
+                chart.move(movement);
             }
         }
-
-
-
-        // FIXME finish
     }
 }

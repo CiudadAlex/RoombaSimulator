@@ -62,14 +62,23 @@ public class ScalableChart {
         }
     }
 
-    public void setWall(Movement movement) {
+    public void move(Movement movement) {
+        Position newPosition = calculateNewPosition(movement);
+        position = newPosition;
+    }
 
-        Position positionOfWall = switch (movement) {
+    private Position calculateNewPosition(Movement movement) {
+        return switch (movement) {
             case UP -> new Position(position.getRow() - 1, position.getColumn());
             case DOWN -> new Position(position.getRow() + 1, position.getColumn());
             case LEFT -> new Position(position.getRow(), position.getColumn() - 1);
             case RIGHT -> new Position(position.getRow(), position.getColumn() + 1);
         };
+    }
+
+    public void setWall(Movement movement) {
+
+        Position positionOfWall = calculateNewPosition(movement);
 
         Cell wallCell = chart[positionOfWall.getRow()][positionOfWall.getColumn()];
         wallCell.setWall(true);
