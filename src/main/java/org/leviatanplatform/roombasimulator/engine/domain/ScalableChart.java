@@ -41,6 +41,27 @@ public class ScalableChart {
         }
     }
 
+    public void stepCurrentPosition() {
+        Cell currentCell = chart[position.getRow()][position.getColumn()];
+        currentCell.setStepped(true);
+    }
+
+    public void actuateCurrentPosition(int radius) {
+
+        int row = position.getRow();
+        int column = position.getColumn();
+
+        for (int r = row - radius; r <= row + radius; r++) {
+            for (int c = column - radius; c <= column + radius; c++) {
+
+                if (r >= 0 && r < rows && c >= 0 && c < columns) {
+                    Cell cell = chart[r][c];
+                    cell.setActuated(true);
+                }
+            }
+        }
+    }
+
     private void setPosition(int row, int column) {
         this.position = new Position(row, column);
     }
