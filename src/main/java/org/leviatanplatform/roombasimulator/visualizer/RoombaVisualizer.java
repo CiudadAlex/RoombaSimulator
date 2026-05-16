@@ -75,7 +75,7 @@ public class RoombaVisualizer {
         for (int r = 0; r < rows; r++) {
             for (int c = 0; c < columns; c++) {
                 Color color = getColor(r, c);
-                pixelCanvas.setRectangle(r, columns - 1 - c, color);
+                pixelCanvas.setRectangle(c, r, color);
             }
         }
 
