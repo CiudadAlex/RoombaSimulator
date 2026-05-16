@@ -18,6 +18,7 @@ public class Main {
         boolean dextroRotatory = false;
 
         Environment env = new RectangleEnvironment(30, 30);
+        //Environment env = new OpenEnvironment();
         Roomba roomba = new Roomba(radius, env, dextroRotatory);
         //roomba.explore();
 
