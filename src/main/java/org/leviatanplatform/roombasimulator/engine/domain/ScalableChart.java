@@ -81,30 +81,29 @@ public class ScalableChart {
         this.position = new Position(row, column);
     }
 
-    // FIXME call
-    public ScalableChart scale() {
+    public ScalableChart scaleIfNeeded() {
 
         int row = this.position.getRow();
         int column = this.position.getColumn();
 
         if (row < margin) {
-            scaleUp(margin);
+            return scaleUp(margin);
         }
 
         if (row >= rows - margin) {
-            scaleDown(margin);
+            return scaleDown(margin);
         }
 
         if (column < margin) {
-            scaleLeft(margin);
+            return scaleLeft(margin);
         }
 
         if (column >= columns - margin) {
-            scaleRight(margin);
+            return scaleRight(margin);
         }
 
         // No escalation done
-        return null;
+        return this;
     }
 
     private ScalableChart scaleUp(int rowsToAdd) {

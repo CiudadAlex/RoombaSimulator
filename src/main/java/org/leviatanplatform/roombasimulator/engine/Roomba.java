@@ -36,6 +36,8 @@ public class Roomba {
         chart.move(movement);
         chart.stepCurrentPosition();
         chart.actuateCurrentPosition(radius);
+
+        chart = chart.scaleIfNeeded();
     }
 
     private MovementResult exploreMove(Movement movement) {
