@@ -68,7 +68,7 @@ public class RoombaVisualizer {
 
         for (int r = 0; r < w; r++) {
             for (int i = 0; i < h; i++) {
-                int escapedIteration = complexPlane.getValue(r, i);
+                int escapedIteration = roomba.getValue(r, i);
                 Color color = getColor(escapedIteration);
                 pixelCanvas.setPixel(r, h - 1 - i, color);
             }

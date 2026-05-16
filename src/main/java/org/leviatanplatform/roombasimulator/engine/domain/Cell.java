@@ -1,6 +1,6 @@
 package org.leviatanplatform.roombasimulator.engine.domain;
 
-public class Cell {
+public class Cell implements CellInfo {
 
     private boolean stepped;
     private boolean actuated;

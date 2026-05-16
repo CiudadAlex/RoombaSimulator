@@ -111,4 +111,15 @@ public class ScalableChart {
         return newScalableChart;
     }
 
+    public int getRows() {
+        return rows;
+    }
+
+    public int getColumns() {
+        return columns;
+    }
+
+    public CellInfo getCellInfo(int row, int column) {
+        return chart[row][column];
+    }
 }
