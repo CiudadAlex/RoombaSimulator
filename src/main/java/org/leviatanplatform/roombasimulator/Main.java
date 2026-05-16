@@ -13,6 +13,7 @@ public class Main {
 
         int w = 1000;
         int h = 800;
+        int pixelScale = 5;
         int radius = 3;
         boolean dextroRotatory = false;
 
@@ -21,7 +22,7 @@ public class Main {
         roomba.explore();
 
         SwingUtilities.invokeLater(() -> {
-            RoombaVisualizer roombaVisualizer = new RoombaVisualizer(roomba, w, h);
+            RoombaVisualizer roombaVisualizer = new RoombaVisualizer(roomba, w, h, pixelScale);
             roombaVisualizer.show();
         });
     }

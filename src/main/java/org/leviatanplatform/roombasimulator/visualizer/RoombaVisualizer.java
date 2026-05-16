@@ -10,15 +10,17 @@ public class RoombaVisualizer {
 
     private final PixelCanvas pixelCanvas;
     private Roomba roomba;
+    private int pixelScale;
     private final int w;
     private final int h;
     private JFrame frame;
 
-    public RoombaVisualizer(Roomba roomba, int w, int h) {
+    public RoombaVisualizer(Roomba roomba, int w, int h, int pixelScale) {
 
         this.roomba = roomba;
         this.w = w;
         this.h = h;
+        this.pixelScale = pixelScale;
 
         this.pixelCanvas = new PixelCanvas(w, h);
     }
@@ -40,10 +42,14 @@ public class RoombaVisualizer {
         paintCanvas();
     }
 
+    public void zoom(int pixelsToAdd) {
+        this.pixelScale = this.pixelScale + pixelsToAdd;
+        refreshAll();
+    }
+
     private void refreshAll() {
         paintCanvas();
     }
-
 
     public void paintCanvas() {
         SwingUtilities.invokeLater(() -> {

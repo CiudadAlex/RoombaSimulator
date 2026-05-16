@@ -42,11 +42,11 @@ public class CommandListener extends KeyAdapter {
     }
 
     private void zoomIn() {
-        // FIXME implement
+        roombaVisualizer.zoom(1);
     }
 
     private void zoomOut() {
-        // FIXME implement
+        roombaVisualizer.zoom(-1);
     }
 
     private void help() {
