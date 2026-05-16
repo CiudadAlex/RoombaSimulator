@@ -110,4 +110,8 @@ public class Roomba {
     public CellInfo getChartCellInfo(int row, int column) {
         return chart.getCellInfo(row, column);
     }
+
+    public PositionInfo getChartPositionInfo() {
+        return chart.getPositionInfo();
+    }
 }

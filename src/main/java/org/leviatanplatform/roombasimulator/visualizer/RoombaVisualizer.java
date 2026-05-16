@@ -3,6 +3,7 @@ package org.leviatanplatform.roombasimulator.visualizer;
 import org.leviatanplatform.roombasimulator.engine.Roomba;
 import org.leviatanplatform.roombasimulator.engine.domain.CellInfo;
 import org.leviatanplatform.roombasimulator.engine.domain.Movement;
+import org.leviatanplatform.roombasimulator.engine.domain.PositionInfo;
 
 import javax.swing.*;
 import java.awt.*;
@@ -73,13 +74,26 @@ public class RoombaVisualizer {
 
         for (int r = 0; r < rows; r++) {
             for (int c = 0; c < columns; c++) {
-                CellInfo cellInfo = roomba.getChartCellInfo(r, c);
-                Color color = getColor(cellInfo);
+                Color color = getColor(r, c);
                 pixelCanvas.setRectangle(r, columns - 1 - c, color);
             }
         }
 
         pixelCanvas.repaint();
+    }
+
+    private Color getColor(int r, int c) {
+        CellInfo cellInfo = roomba.getChartCellInfo(r, c);
+        PositionInfo positionInfo = roomba.getChartPositionInfo();
+
+        int row = positionInfo.getRow();
+        int column = positionInfo.getColumn();
+
+        if (r == row && c == column) {
+            return Color.RED;
+        }
+
+        return getColor(cellInfo);
     }
 
     private Color getColor(CellInfo cellInfo) {

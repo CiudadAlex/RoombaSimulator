@@ -1,6 +1,6 @@
 package org.leviatanplatform.roombasimulator.engine.domain;
 
-public class Position {
+public class Position implements PositionInfo {
 
     private int row;
     private int column;

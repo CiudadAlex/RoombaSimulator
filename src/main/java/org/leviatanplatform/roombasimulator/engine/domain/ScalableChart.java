@@ -146,6 +146,10 @@ public class ScalableChart {
         return columns;
     }
 
+    public PositionInfo getPositionInfo() {
+        return position;
+    }
+
     public CellInfo getCellInfo(int row, int column) {
         return chart[row][column];
     }
