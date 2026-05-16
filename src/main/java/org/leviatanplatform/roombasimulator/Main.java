@@ -13,13 +13,13 @@ public class Main {
 
         int w = 1000;
         int h = 800;
-        int pixelScale = 5;
+        int pixelScale = 15;
         int radius = 3;
         boolean dextroRotatory = false;
 
         Environment env = new RectangleEnvironment(30, 30);
         Roomba roomba = new Roomba(radius, env, dextroRotatory);
-        roomba.explore();
+        //roomba.explore();
 
         SwingUtilities.invokeLater(() -> {
             RoombaVisualizer roombaVisualizer = new RoombaVisualizer(roomba, w, h, pixelScale);

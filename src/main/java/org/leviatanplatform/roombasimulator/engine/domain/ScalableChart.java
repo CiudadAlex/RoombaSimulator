@@ -4,16 +4,18 @@ public class ScalableChart {
 
     private final int rows;
     private final int columns;
+    private final int margin;
     private final Cell[][] chart;
     private Position position;
 
     public ScalableChart() {
-        this(10, 10);
+        this(20, 20, 5);
     }
 
-    public ScalableChart(int rows, int columns) {
+    public ScalableChart(int rows, int columns, int margin) {
         this.rows = rows;
         this.columns = columns;
+        this.margin = margin;
         this.chart = new Cell[rows][columns];
         this.position = new Position(rows/2, columns/2);
 
@@ -79,33 +81,59 @@ public class ScalableChart {
         this.position = new Position(row, column);
     }
 
-    public ScalableChart scaleUp(int rowsToAdd) {
+    // FIXME call
+    public ScalableChart scale() {
 
-        ScalableChart newScalableChart = new ScalableChart(rows + rowsToAdd, columns);
+        int row = this.position.getRow();
+        int column = this.position.getColumn();
+
+        if (row < margin) {
+            scaleUp(margin);
+        }
+
+        if (row >= rows - margin) {
+            scaleDown(margin);
+        }
+
+        if (column < margin) {
+            scaleLeft(margin);
+        }
+
+        if (column >= columns - margin) {
+            scaleRight(margin);
+        }
+
+        // No escalation done
+        return null;
+    }
+
+    private ScalableChart scaleUp(int rowsToAdd) {
+
+        ScalableChart newScalableChart = new ScalableChart(rows + rowsToAdd, columns, margin);
         newScalableChart.copyCells(this.chart, 0, rows, 0, columns, rowsToAdd, 0);
         newScalableChart.setPosition(this.position.getRow() + rowsToAdd, this.position.getColumn());
         return newScalableChart;
     }
 
-    public ScalableChart scaleDown(int rowsToAdd) {
+    private ScalableChart scaleDown(int rowsToAdd) {
 
-        ScalableChart newScalableChart = new ScalableChart(rows + rowsToAdd, columns);
+        ScalableChart newScalableChart = new ScalableChart(rows + rowsToAdd, columns, margin);
         newScalableChart.copyCells(this.chart, 0, rows, 0, columns, 0, 0);
         newScalableChart.setPosition(this.position.getRow(), this.position.getColumn());
         return newScalableChart;
     }
 
-    public ScalableChart scaleLeft(int columnsToAdd) {
+    private ScalableChart scaleLeft(int columnsToAdd) {
 
-        ScalableChart newScalableChart = new ScalableChart(rows, columns + columnsToAdd);
+        ScalableChart newScalableChart = new ScalableChart(rows, columns + columnsToAdd, margin);
         newScalableChart.copyCells(this.chart, 0, rows, 0, columns, 0, columnsToAdd);
         newScalableChart.setPosition(this.position.getRow(), this.position.getColumn() + columnsToAdd);
         return newScalableChart;
     }
 
-    public ScalableChart scaleRight(int columnsToAdd) {
+    private ScalableChart scaleRight(int columnsToAdd) {
 
-        ScalableChart newScalableChart = new ScalableChart(rows, columns + columnsToAdd);
+        ScalableChart newScalableChart = new ScalableChart(rows, columns + columnsToAdd, margin);
         newScalableChart.copyCells(this.chart, 0, rows, 0, columns, 0, 0);
         newScalableChart.setPosition(this.position.getRow(), this.position.getColumn());
         return newScalableChart;
