@@ -27,6 +27,8 @@ public class CommandListener extends KeyAdapter {
         }
     }
 
+    // FIXME check movement with arrows
+
     private void up() {
         roombaVisualizer.moveRoomba(Movement.UP);
     }
