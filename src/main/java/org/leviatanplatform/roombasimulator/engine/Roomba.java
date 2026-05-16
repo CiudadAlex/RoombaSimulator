@@ -9,11 +9,17 @@ public class Roomba {
 
     private final int radius;
     private final Environment env;
+    private final boolean dextroRotatory;
     private ScalableChart chart;
 
     public Roomba(int radius, Environment env) {
+        this(radius, env, false);
+    }
+
+    public Roomba(int radius, Environment env, boolean dextroRotatory) {
         this.radius = radius;
         this.env = env;
+        this.dextroRotatory = dextroRotatory;
         this.chart = new ScalableChart();
     }
 
@@ -58,7 +64,38 @@ public class Roomba {
         }
     }
 
+    private Movement getMovementSideways(Movement movement, boolean inverse) {
+
+        boolean dextroRotatoryEffective = dextroRotatory ^ inverse;
+
+        if (dextroRotatoryEffective) {
+            return movement.getDextroRotatorySubsequent();
+        } else {
+            return movement.getLevoRotatorySubsequent();
+        }
+    }
+
     private void exploreWall(Movement movementThatHitsWithWall) {
-        Movement movementSideways = movementThatHitsWithWall.getLevoRotatorySubsequent();
+
+        Movement movementSideways = getMovementSideways(movementThatHitsWithWall, false);
+
+        MovementResult movementResult = exploreMove(movementSideways);
+
+        switch (movementResult) {
+            case WALL ->  exploreWall(movementSideways);
+            case SUCCESS -> exploreWallSideWays(movementSideways);
+        };
+    }
+
+    private void exploreWallSideWays(Movement movementSideways) {
+
+        Movement movementSidewaysInverse = getMovementSideways(movementSideways, true);
+
+        MovementResult movementResult = exploreMove(movementSideways);
+
+        switch (movementResult) {
+            case WALL ->  exploreWall(movementSideways);
+            case SUCCESS -> exploreWallSideWays(movementSideways);
+        };
     }
 }
