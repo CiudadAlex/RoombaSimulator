@@ -49,7 +49,18 @@ public class RoombaVisualizer {
 
     public void moveRoomba(Movement movement) {
         roomba.move(movement);
+        changePixelScaleIfNeeded();
         refreshAll();
+    }
+
+    private void changePixelScaleIfNeeded() {
+        int rows = roomba.getChartRows();
+        int columns = roomba.getChartColumns();
+        int pixelScale = pixelCanvas.getPixelScale();
+
+        if (rows * pixelScale > h || columns * pixelScale > w) {
+            pixelCanvas.addToPixelScale(-1);
+        }
     }
 
     private void refreshAll() {

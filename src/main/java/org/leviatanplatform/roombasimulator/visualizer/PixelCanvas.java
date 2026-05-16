@@ -24,6 +24,14 @@ public class PixelCanvas extends JPanel {
 
     public void addToPixelScale(int pixelsToAdd) {
         this.pixelScale = this.pixelScale + pixelsToAdd;
+
+        if (this.pixelScale < 1) {
+            this.pixelScale = 1;
+        }
+    }
+
+    public int getPixelScale() {
+        return pixelScale;
     }
 
     @Override
