@@ -1,9 +1,6 @@
 package org.leviatanplatform.roombasimulator.engine;
 
-import org.leviatanplatform.roombasimulator.engine.domain.Environment;
-import org.leviatanplatform.roombasimulator.engine.domain.Movement;
-import org.leviatanplatform.roombasimulator.engine.domain.MovementResult;
-import org.leviatanplatform.roombasimulator.engine.domain.ScalableChart;
+import org.leviatanplatform.roombasimulator.engine.domain.*;
 
 public class Roomba {
 
@@ -97,6 +94,18 @@ public class Roomba {
         switch (movementResult) {
             case WALL ->  exploreWall(movementSidewaysInverse);
             case SUCCESS -> exploreWallSideWays(movementSidewaysInverse);
-        };
+        }
+    }
+
+    public int getChartRows() {
+        return chart.getRows();
+    }
+
+    public int getChartColumns() {
+        return chart.getColumns();
+    }
+
+    public CellInfo getChartCellInfo(int row, int column) {
+        return chart.getCellInfo(row, column);
     }
 }

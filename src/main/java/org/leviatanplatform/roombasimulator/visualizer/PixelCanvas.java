@@ -7,13 +7,23 @@ import java.awt.image.BufferedImage;
 public class PixelCanvas extends JPanel {
 
     private BufferedImage canvas;
+    private int pixelScale;
 
-    public PixelCanvas(int w, int h) {
-        canvas = new BufferedImage(w, h, BufferedImage.TYPE_INT_RGB);
+    public PixelCanvas(int w, int h, int pixelScale) {
+        this.pixelScale = pixelScale;
+        this.canvas = new BufferedImage(w, h, BufferedImage.TYPE_INT_RGB);
     }
 
-    public void setPixel(int x, int y, Color color) {
-        canvas.setRGB(x, y, color.getRGB());
+    public void setRectangle(int x, int y, Color color) {
+
+        Graphics2D g = this.canvas.createGraphics();
+
+        g.setColor(color);
+        g.fillRect(x * pixelScale, y * pixelScale, pixelScale, pixelScale);
+    }
+
+    public void addToPixelScale(int pixelsToAdd) {
+        this.pixelScale = this.pixelScale + pixelsToAdd;
     }
 
     @Override

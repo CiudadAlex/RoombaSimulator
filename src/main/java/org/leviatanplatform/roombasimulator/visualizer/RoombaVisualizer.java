@@ -2,6 +2,7 @@ package org.leviatanplatform.roombasimulator.visualizer;
 
 import org.leviatanplatform.roombasimulator.engine.Roomba;
 import org.leviatanplatform.roombasimulator.engine.domain.Cell;
+import org.leviatanplatform.roombasimulator.engine.domain.CellInfo;
 
 import javax.swing.*;
 import java.awt.*;
@@ -10,7 +11,6 @@ public class RoombaVisualizer {
 
     private final PixelCanvas pixelCanvas;
     private Roomba roomba;
-    private int pixelScale;
     private final int w;
     private final int h;
     private JFrame frame;
@@ -20,9 +20,8 @@ public class RoombaVisualizer {
         this.roomba = roomba;
         this.w = w;
         this.h = h;
-        this.pixelScale = pixelScale;
 
-        this.pixelCanvas = new PixelCanvas(w, h);
+        this.pixelCanvas = new PixelCanvas(w, h, pixelScale);
     }
 
     public void show() {
@@ -43,7 +42,7 @@ public class RoombaVisualizer {
     }
 
     public void zoom(int pixelsToAdd) {
-        this.pixelScale = this.pixelScale + pixelsToAdd;
+        pixelCanvas.addToPixelScale(pixelsToAdd);
         refreshAll();
     }
 
@@ -64,24 +63,25 @@ public class RoombaVisualizer {
 
         frame.setTitle("Roomba simulator");
 
-        // FIXME finish
+        int rows = roomba.getChartRows();
+        int columns = roomba.getChartColumns();
 
-        for (int r = 0; r < w; r++) {
-            for (int i = 0; i < h; i++) {
-                int escapedIteration = roomba.getValue(r, i);
-                Color color = getColor(escapedIteration);
-                pixelCanvas.setPixel(r, h - 1 - i, color);
+        for (int r = 0; r < rows; r++) {
+            for (int c = 0; c < columns; c++) {
+                CellInfo cellInfo = roomba.getChartCellInfo(r, c);
+                Color color = getColor(cellInfo);
+                pixelCanvas.setRectangle(r, columns - 1 - c, color);
             }
         }
 
         pixelCanvas.repaint();
     }
 
-    private Color getColor(Cell cell) {
+    private Color getColor(CellInfo cellInfo) {
 
-        boolean stepped = cell.isStepped();
-        boolean actuated = cell.isActuated();
-        boolean wall = cell.isWall();
+        boolean stepped = cellInfo.isStepped();
+        boolean actuated = cellInfo.isActuated();
+        boolean wall = cellInfo.isWall();
 
         if (wall) {
             return Color.BLACK;
