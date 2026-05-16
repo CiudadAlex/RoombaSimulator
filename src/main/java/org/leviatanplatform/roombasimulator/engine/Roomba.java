@@ -31,7 +31,7 @@ public class Roomba {
         // FIXME check wall completed
     }
 
-    private void move(Movement movement) {
+    public void move(Movement movement) {
 
         chart.move(movement);
         chart.stepCurrentPosition();

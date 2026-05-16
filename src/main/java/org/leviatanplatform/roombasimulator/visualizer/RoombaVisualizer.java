@@ -1,8 +1,8 @@
 package org.leviatanplatform.roombasimulator.visualizer;
 
 import org.leviatanplatform.roombasimulator.engine.Roomba;
-import org.leviatanplatform.roombasimulator.engine.domain.Cell;
 import org.leviatanplatform.roombasimulator.engine.domain.CellInfo;
+import org.leviatanplatform.roombasimulator.engine.domain.Movement;
 
 import javax.swing.*;
 import java.awt.*;
@@ -28,7 +28,7 @@ public class RoombaVisualizer {
 
         if (frame == null) {
 
-            frame = new JFrame("Fractal");
+            frame = new JFrame("Roomba Simulator");
             frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
             frame.setSize(w + 30, h + 50);
             frame.setVisible(true);
@@ -43,6 +43,11 @@ public class RoombaVisualizer {
 
     public void zoom(int pixelsToAdd) {
         pixelCanvas.addToPixelScale(pixelsToAdd);
+        refreshAll();
+    }
+
+    public void moveRoomba(Movement movement) {
+        roomba.move(movement);
         refreshAll();
     }
 

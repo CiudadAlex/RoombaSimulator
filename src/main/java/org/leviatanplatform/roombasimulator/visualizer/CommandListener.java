@@ -1,5 +1,7 @@
 package org.leviatanplatform.roombasimulator.visualizer;
 
+import org.leviatanplatform.roombasimulator.engine.domain.Movement;
+
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
@@ -26,19 +28,19 @@ public class CommandListener extends KeyAdapter {
     }
 
     private void up() {
-        // FIXME implement
+        roombaVisualizer.moveRoomba(Movement.UP);
     }
 
     private void down() {
-        // FIXME implement
+        roombaVisualizer.moveRoomba(Movement.DOWN);
     }
 
     private void left() {
-        // FIXME implement
+        roombaVisualizer.moveRoomba(Movement.LEFT);
     }
 
     private void right() {
-        // FIXME implement
+        roombaVisualizer.moveRoomba(Movement.RIGHT);
     }
 
     private void zoomIn() {
