@@ -9,6 +9,8 @@ public class Roomba {
     private final boolean dextroRotatory;
     private ScalableChart chart;
 
+    private MovementListener movementListener;
+
     public Roomba(int radius, Environment env) {
         this(radius, env, false);
     }
@@ -38,6 +40,10 @@ public class Roomba {
         chart.actuateCurrentPosition(radius);
 
         chart = chart.scaleIfNeeded();
+
+        if (movementListener != null) {
+            movementListener.movementDone();
+        }
     }
 
     public MovementResult exploreMove(Movement movement) {
@@ -113,5 +119,9 @@ public class Roomba {
 
     public PositionInfo getChartPositionInfo() {
         return chart.getPositionInfo();
+    }
+
+    public void setMovementListener(MovementListener movementListener) {
+        this.movementListener = movementListener;
     }
 }

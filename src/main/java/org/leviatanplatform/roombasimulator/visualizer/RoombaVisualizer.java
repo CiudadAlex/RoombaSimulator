@@ -23,6 +23,7 @@ public class RoombaVisualizer implements MovementListener {
         this.w = w;
         this.h = h;
 
+        this.roomba.setMovementListener(this);
         this.pixelCanvas = new PixelCanvas(w, h, pixelScale);
     }
 
@@ -131,6 +132,14 @@ public class RoombaVisualizer implements MovementListener {
 
     @Override
     public void movementDone() {
+
+        // FIXME review
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+
         refreshAll();
     }
 }
