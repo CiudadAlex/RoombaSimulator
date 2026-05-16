@@ -3,12 +3,13 @@ package org.leviatanplatform.roombasimulator.visualizer;
 import org.leviatanplatform.roombasimulator.engine.Roomba;
 import org.leviatanplatform.roombasimulator.engine.domain.CellInfo;
 import org.leviatanplatform.roombasimulator.engine.domain.Movement;
+import org.leviatanplatform.roombasimulator.engine.domain.MovementListener;
 import org.leviatanplatform.roombasimulator.engine.domain.PositionInfo;
 
 import javax.swing.*;
 import java.awt.*;
 
-public class RoombaVisualizer {
+public class RoombaVisualizer implements MovementListener {
 
     private final PixelCanvas pixelCanvas;
     private Roomba roomba;
@@ -48,7 +49,7 @@ public class RoombaVisualizer {
     }
 
     public void moveRoomba(Movement movement) {
-        roomba.move(movement);
+        roomba.exploreMove(movement);
         changePixelScaleIfNeeded();
         refreshAll();
     }
@@ -128,4 +129,8 @@ public class RoombaVisualizer {
         return Color.WHITE;
     }
 
+    @Override
+    public void movementDone() {
+        refreshAll();
+    }
 }
