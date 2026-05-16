@@ -29,8 +29,9 @@ public class Roomba {
         chart.actuateCurrentPosition(radius);
 
         exploreStraightLineUntilWall(Movement.UP);
+        exploreWall(Movement.UP);
 
-        // FIXME finish
+        // FIXME check wall completed
     }
 
     private void move(Movement movement) {
@@ -91,11 +92,11 @@ public class Roomba {
 
         Movement movementSidewaysInverse = getMovementSideways(movementSideways, true);
 
-        MovementResult movementResult = exploreMove(movementSideways);
+        MovementResult movementResult = exploreMove(movementSidewaysInverse);
 
         switch (movementResult) {
-            case WALL ->  exploreWall(movementSideways);
-            case SUCCESS -> exploreWallSideWays(movementSideways);
+            case WALL ->  exploreWall(movementSidewaysInverse);
+            case SUCCESS -> exploreWallSideWays(movementSidewaysInverse);
         };
     }
 }
