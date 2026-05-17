@@ -18,7 +18,16 @@ public class VerticalRange {
         this.right = right;
     }
 
-    // FIXME use left, right
+    public boolean applies(Position position) {
+
+        int column = position.getColumn();
+
+        if (column <= right && column >= left) {
+            return true;
+        }
+
+        return false;
+    }
 
     public MovementStatus evaluateMovement(Position position, Movement movement) {
 
