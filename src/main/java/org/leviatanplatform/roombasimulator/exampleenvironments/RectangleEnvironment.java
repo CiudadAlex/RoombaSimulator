@@ -15,7 +15,7 @@ public class RectangleEnvironment extends AbstractRangesEnvironment {
                 buildListHorizontalRange(rows, columns));
     }
 
-    public static List<VerticalRange> buildListVerticalRange(int rows, int columns) {
+    private static List<VerticalRange> buildListVerticalRange(int rows, int columns) {
 
         int halfRows = rows / 2;
         int halfColumns = columns / 2;
@@ -23,7 +23,7 @@ public class RectangleEnvironment extends AbstractRangesEnvironment {
         return List.of(verticalRange);
     }
 
-    public static List<HorizontalRange> buildListHorizontalRange(int rows, int columns) {
+    private static List<HorizontalRange> buildListHorizontalRange(int rows, int columns) {
 
         int halfRows = rows / 2;
         int halfColumns = columns / 2;

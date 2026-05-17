@@ -1,28 +1,45 @@
 package org.leviatanplatform.roombasimulator.exampleenvironments;
 
-import org.leviatanplatform.roombasimulator.engine.domain.Environment;
-import org.leviatanplatform.roombasimulator.engine.domain.Movement;
-import org.leviatanplatform.roombasimulator.engine.domain.MovementResult;
 import org.leviatanplatform.roombasimulator.engine.domain.Position;
+import org.leviatanplatform.roombasimulator.exampleenvironments.parent.AbstractRangesEnvironment;
+import org.leviatanplatform.roombasimulator.exampleenvironments.utils.HorizontalRange;
+import org.leviatanplatform.roombasimulator.exampleenvironments.utils.VerticalRange;
 
-public class TruncatedRectangleEnvironment implements Environment {
+import java.util.List;
 
-    private Position position = new Position(0, 0);
-
-    private final int halfRows;
-    private final int halfColumns;
-    private final int truncationLength;
+public class TruncatedRectangleEnvironment extends AbstractRangesEnvironment {
 
     public TruncatedRectangleEnvironment(int rows, int columns, int truncationLength) {
-        this.halfRows = rows / 2;
-        this.halfColumns = columns / 2;
-        this.truncationLength = truncationLength;
+        super(new Position(0, 0),
+                buildListVerticalRange(rows, columns, truncationLength),
+                buildListHorizontalRange(rows, columns, truncationLength));
     }
 
-    @Override
-    public MovementResult tryToMove(Movement movement) {
-        // FIXME finish
+    private static List<VerticalRange> buildListVerticalRange(int rows, int columns, int truncationLength) {
 
-        return null;
+        int rowLong = rows / 2;
+        int columnLong = columns / 2;
+
+        int rowShort = rowLong - truncationLength;
+        int columnShort = columnLong - truncationLength;
+
+        VerticalRange verticalRange1 = new VerticalRange(rowShort, -rowShort, -columnLong, -columnShort);
+        VerticalRange verticalRange2 = new VerticalRange(rowLong, -rowLong, -columnShort, columnShort);
+        VerticalRange verticalRange3 = new VerticalRange(rowShort, -rowShort, columnShort, columnLong);
+        return List.of(verticalRange1, verticalRange2, verticalRange3);
+    }
+
+    private static List<HorizontalRange> buildListHorizontalRange(int rows, int columns, int truncationLength) {
+
+        int rowLong = rows / 2;
+        int columnLong = columns / 2;
+
+        int rowShort = rowLong - truncationLength;
+        int columnShort = columnLong - truncationLength;
+
+        HorizontalRange horizontalRange1 = new HorizontalRange(rowLong, rowShort, -columnShort, columnShort);
+        HorizontalRange horizontalRange2 = new HorizontalRange(rowShort, -rowShort, -columnLong, columnLong);
+        HorizontalRange horizontalRange3 = new HorizontalRange(-rowShort, -rowLong, -columnShort, columnShort);
+        return List.of(horizontalRange1, horizontalRange2, horizontalRange3);
     }
 }

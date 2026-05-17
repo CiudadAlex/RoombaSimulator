@@ -33,6 +33,6 @@ public class Main {
         Environment openEnvironment = new OpenEnvironment();
         Environment rectangleEnvironment = new RectangleEnvironment(30, 30);
         Environment truncatedRectangleEnvironment = new TruncatedRectangleEnvironment(30, 30, 7);
-        return rectangleEnvironment;
+        return truncatedRectangleEnvironment;
     }
 }
