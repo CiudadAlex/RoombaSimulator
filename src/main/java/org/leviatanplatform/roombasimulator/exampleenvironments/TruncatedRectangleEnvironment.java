@@ -1,45 +1,35 @@
 package org.leviatanplatform.roombasimulator.exampleenvironments;
 
 import org.leviatanplatform.roombasimulator.engine.domain.Position;
-import org.leviatanplatform.roombasimulator.exampleenvironments.parent.AbstractRangesEnvironment;
-import org.leviatanplatform.roombasimulator.exampleenvironments.utils.HorizontalRange;
-import org.leviatanplatform.roombasimulator.exampleenvironments.utils.VerticalRange;
+import org.leviatanplatform.roombasimulator.exampleenvironments.parent.AbstractWallPositionsEnvironment;
+import org.leviatanplatform.roombasimulator.exampleenvironments.utils.WallRectangle;
 
+import java.util.ArrayList;
 import java.util.List;
 
-public class TruncatedRectangleEnvironment extends AbstractRangesEnvironment {
+public class TruncatedRectangleEnvironment extends AbstractWallPositionsEnvironment {
 
     public TruncatedRectangleEnvironment(int rows, int columns, int truncationLength) {
         super(new Position(0, 0),
-                buildListVerticalRange(rows, columns, truncationLength),
-                buildListHorizontalRange(rows, columns, truncationLength));
+                buildListPositionsWall(rows, columns, truncationLength));
     }
 
-    private static List<VerticalRange> buildListVerticalRange(int rows, int columns, int truncationLength) {
+    private static List<Position> buildListPositionsWall(int rows, int columns, int truncationLength) {
 
-        int rowLong = rows / 2;
-        int columnLong = columns / 2;
+        int halfRows = rows / 2;
+        int halfColumns = columns / 2;
 
-        int rowShort = rowLong - truncationLength;
-        int columnShort = columnLong - truncationLength;
+        List<Position> listWallPositions = new ArrayList<>();
+        listWallPositions.addAll(WallRectangle.generateWallRectangle(halfRows, -halfRows, -halfColumns, halfColumns));
 
-        VerticalRange verticalRange1 = new VerticalRange(rowShort, -rowShort, -columnLong, -columnShort);
-        VerticalRange verticalRange2 = new VerticalRange(rowLong, -rowLong, -columnShort, columnShort);
-        VerticalRange verticalRange3 = new VerticalRange(rowShort, -rowShort, columnShort, columnLong);
-        return List.of(verticalRange1, verticalRange2, verticalRange3);
+        listWallPositions.addAll(WallRectangle.generateWallRectangle(halfRows, halfRows-truncationLength, -halfColumns, -halfColumns+truncationLength));
+        listWallPositions.addAll(WallRectangle.generateWallRectangle(halfRows, halfRows-truncationLength, halfColumns-truncationLength, halfColumns));
+
+
+        listWallPositions.addAll(WallRectangle.generateWallRectangle(-halfRows+truncationLength, -halfRows, -halfColumns, -halfColumns+truncationLength));
+        listWallPositions.addAll(WallRectangle.generateWallRectangle(-halfRows+truncationLength, -halfRows, halfColumns-truncationLength, halfColumns));
+
+        return listWallPositions;
     }
 
-    private static List<HorizontalRange> buildListHorizontalRange(int rows, int columns, int truncationLength) {
-
-        int rowLong = rows / 2;
-        int columnLong = columns / 2;
-
-        int rowShort = rowLong - truncationLength;
-        int columnShort = columnLong - truncationLength;
-
-        HorizontalRange horizontalRange1 = new HorizontalRange(rowLong, rowShort, -columnShort, columnShort);
-        HorizontalRange horizontalRange2 = new HorizontalRange(rowShort, -rowShort, -columnLong, columnLong);
-        HorizontalRange horizontalRange3 = new HorizontalRange(-rowShort, -rowLong, -columnShort, columnShort);
-        return List.of(horizontalRange1, horizontalRange2, horizontalRange3);
-    }
 }
