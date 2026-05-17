@@ -18,6 +18,8 @@ public class VerticalRange {
         this.right = right;
     }
 
+    // FIXME use left, right
+
     public MovementStatus evaluateMovement(Position position, Movement movement) {
 
         Position positionMoved = position.clonePosition();
