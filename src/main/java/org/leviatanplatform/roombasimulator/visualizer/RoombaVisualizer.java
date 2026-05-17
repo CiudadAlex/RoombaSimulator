@@ -15,6 +15,7 @@ public class RoombaVisualizer implements MovementListener {
     private Roomba roomba;
     private final int w;
     private final int h;
+    private int millisWaitBetweenMovements = 500;
     private JFrame frame;
 
     public RoombaVisualizer(Roomba roomba, int w, int h, int pixelScale) {
@@ -136,12 +137,15 @@ public class RoombaVisualizer implements MovementListener {
         thread.start();
     }
 
+    public void accelerateMovement(float acceleratingFactor) {
+        millisWaitBetweenMovements = (int) Math.ceil(millisWaitBetweenMovements/acceleratingFactor);
+    }
+
     @Override
     public void movementDone() {
 
-        // FIXME review
         try {
-            Thread.sleep(1000);
+            Thread.sleep(millisWaitBetweenMovements);
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }

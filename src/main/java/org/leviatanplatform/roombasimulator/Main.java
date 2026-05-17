@@ -26,7 +26,4 @@ public class Main {
             roombaVisualizer.show();
         });
     }
-
-    // FIXME visualize the executing algorithm step by step
-    // FIXME finish
 }
