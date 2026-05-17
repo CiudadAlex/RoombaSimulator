@@ -23,6 +23,7 @@ public class CommandListener extends KeyAdapter {
             case KeyEvent.VK_RIGHT -> right();
             case KeyEvent.VK_2 -> zoomIn();
             case KeyEvent.VK_1 -> zoomOut();
+            case KeyEvent.VK_S -> start();
             case KeyEvent.VK_H -> help();
         }
     }
@@ -49,6 +50,10 @@ public class CommandListener extends KeyAdapter {
 
     private void zoomOut() {
         roombaVisualizer.zoom(-1);
+    }
+
+    private void start() {
+        roombaVisualizer.startRoombaExploration();
     }
 
     private void help() {

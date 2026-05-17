@@ -20,7 +20,6 @@ public class Main {
         Environment env = new RectangleEnvironment(30, 30);
         //Environment env = new OpenEnvironment();
         Roomba roomba = new Roomba(radius, env, dextroRotatory);
-        //roomba.explore();
 
         SwingUtilities.invokeLater(() -> {
             RoombaVisualizer roombaVisualizer = new RoombaVisualizer(roomba, w, h, pixelScale);

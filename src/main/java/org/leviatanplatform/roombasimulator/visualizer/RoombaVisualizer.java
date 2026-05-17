@@ -130,6 +130,12 @@ public class RoombaVisualizer implements MovementListener {
         return Color.WHITE;
     }
 
+    public void startRoombaExploration() {
+
+        Thread thread = new Thread(() -> roomba.explore());
+        thread.start();
+    }
+
     @Override
     public void movementDone() {
 
