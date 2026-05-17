@@ -4,7 +4,7 @@ import org.leviatanplatform.roombasimulator.engine.domain.Movement;
 import org.leviatanplatform.roombasimulator.engine.domain.MovementResult;
 import org.leviatanplatform.roombasimulator.engine.domain.Position;
 
-public class HorizontalRange {
+public class HorizontalRange implements Range {
 
     private int top;
     private int bottom;

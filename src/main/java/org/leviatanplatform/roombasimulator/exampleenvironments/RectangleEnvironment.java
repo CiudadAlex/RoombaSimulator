@@ -46,5 +46,4 @@ public class RectangleEnvironment implements Environment {
         return null;
     }
 
-    // FIXME use VerticalRange
 }
