@@ -27,6 +27,19 @@ public class Position implements PositionInfo {
         }
     }
 
+    @Override
+    public boolean equals(Object obj) {
+
+        if (obj instanceof Position pos) {
+
+            if (pos.row == this.row && pos.column == this.column) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
     public Position clonePosition() {
         return new Position(row, column);
     }

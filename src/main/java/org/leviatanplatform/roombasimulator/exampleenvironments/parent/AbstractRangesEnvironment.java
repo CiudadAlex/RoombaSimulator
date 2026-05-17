@@ -11,7 +11,7 @@ import org.leviatanplatform.roombasimulator.exampleenvironments.utils.VerticalRa
 
 import java.util.List;
 
-public abstract class AbstractRangesEnvironment  implements Environment {
+public abstract class AbstractRangesEnvironment implements Environment {
 
     private Position position;
     private final List<VerticalRange> listVerticalRange;
