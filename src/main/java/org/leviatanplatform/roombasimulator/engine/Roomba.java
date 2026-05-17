@@ -93,6 +93,8 @@ public class Roomba {
         };
     }
 
+    // FIXME remove recursive code
+
     private void exploreWallSideWays(Movement movementSideways) {
 
         Movement movementSidewaysInverse = getMovementSideways(movementSideways, true);
