@@ -81,30 +81,31 @@ public class Roomba {
         }
     }
 
-    private void exploreWall(Movement movementThatHitsWithWall) {
+    private MovementAndResult getMovementSidewaysAndResult(MovementAndResult movementAndResult, boolean inverse) {
 
-        Movement movementSideways = getMovementSideways(movementThatHitsWithWall, false);
-
+        Movement movement = movementAndResult.getMovement();
+        Movement movementSideways = getMovementSideways(movement, inverse);
         MovementResult movementResult = exploreMove(movementSideways);
-
-        switch (movementResult) {
-            case WALL ->  exploreWall(movementSideways);
-            case SUCCESS -> exploreWallSideWays(movementSideways);
-        };
+        return new MovementAndResult(movementSideways, movementResult);
     }
 
-    // FIXME remove recursive code
+    private void exploreWall(Movement initialMovementThatHitsWithWall) {
 
-    private void exploreWallSideWays(Movement movementSideways) {
+        MovementAndResult lastMovementAndResult = new MovementAndResult(initialMovementThatHitsWithWall, MovementResult.WALL);
 
-        Movement movementSidewaysInverse = getMovementSideways(movementSideways, true);
+        while (true) {
 
-        MovementResult movementResult = exploreMove(movementSidewaysInverse);
-
-        switch (movementResult) {
-            case WALL ->  exploreWall(movementSidewaysInverse);
-            case SUCCESS -> exploreWallSideWays(movementSidewaysInverse);
+            switch (lastMovementAndResult.getMovementResult()) {
+                case WALL -> {
+                    lastMovementAndResult = getMovementSidewaysAndResult(lastMovementAndResult, false);
+                }
+                case SUCCESS -> {
+                    lastMovementAndResult = getMovementSidewaysAndResult(lastMovementAndResult, true);
+                }
+            }
         }
+
+        // FIXME break when repeat path
     }
 
     public int getChartRows() {
