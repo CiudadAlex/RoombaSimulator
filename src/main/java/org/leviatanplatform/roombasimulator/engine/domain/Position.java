@@ -5,6 +5,10 @@ public class Position implements PositionInfo {
     private int row;
     private int column;
 
+    public Position(PositionInfo positionInfo) {
+        this(positionInfo.getRow(), positionInfo.getColumn());
+    }
+
     public Position(int row, int column) {
         this.row = row;
         this.column = column;

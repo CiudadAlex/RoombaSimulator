@@ -163,11 +163,11 @@ public class ScalableChart {
         return chart[row][column];
     }
 
-    public void setTraceableLocation(String name, Position location) {
-        this.mapTraceableLocations.put(name, location);
+    public void setTraceableLocation(String name, PositionInfo location) {
+        this.mapTraceableLocations.put(name, new Position(location));
     }
 
-    public Position getTraceableLocation(String name, Position location) {
+    public Position getTraceableLocation(String name) {
         return this.mapTraceableLocations.get(name);
     }
 
@@ -176,7 +176,8 @@ public class ScalableChart {
         for (Map.Entry<String, Position> entry : mapTraceableLocations.entrySet()) {
             String locationName = entry.getKey();
             Position location = entry.getValue();
-            this.mapTraceableLocations.put(locationName, location);
+            Position transformedLocation = transformPosition.apply(location);
+            this.mapTraceableLocations.put(locationName, transformedLocation);
         }
     }
 }

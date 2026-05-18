@@ -4,6 +4,8 @@ import org.leviatanplatform.roombasimulator.engine.domain.*;
 
 public class Roomba {
 
+    private static final String LOCATION_INIT_WALL_EXPLORING = "LOCATION_INIT_WALL_EXPLORING";
+
     private final int radius;
     private final Environment env;
     private final boolean dextroRotatory;
@@ -30,7 +32,7 @@ public class Roomba {
         exploreStraightLineUntilWall(Movement.UP);
         exploreWall(Movement.UP);
 
-        // FIXME check wall completed
+        // FIXME check rectangles of void of action
     }
 
     private void move(Movement movement) {
@@ -92,6 +94,7 @@ public class Roomba {
     private void exploreWall(Movement initialMovementThatHitsWithWall) {
 
         PositionInfo initialPositionInfo = chart.getPositionInfo().clonePositionInfo();
+        chart.setTraceableLocation(LOCATION_INIT_WALL_EXPLORING, initialPositionInfo);
 
         MovementAndResult lastMovementAndResult = new MovementAndResult(initialMovementThatHitsWithWall, MovementResult.WALL);
 
@@ -105,9 +108,15 @@ public class Roomba {
                     lastMovementAndResult = getMovementSidewaysAndResult(lastMovementAndResult, true);
                 }
             }
-        }
 
-        // FIXME break when repeat path
+            PositionInfo transformedInitialPositionInfo = chart.getTraceableLocation(LOCATION_INIT_WALL_EXPLORING);
+            PositionInfo currentPositionInfo = chart.getPositionInfo().clonePositionInfo();
+
+            if (transformedInitialPositionInfo.equals(currentPositionInfo)) {
+                // All the wall has been wandered
+                break;
+            }
+        }
     }
 
     public int getChartRows() {
