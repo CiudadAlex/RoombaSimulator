@@ -1,5 +1,9 @@
 package org.leviatanplatform.roombasimulator.engine.domain;
 
+import java.util.HashMap;
+import java.util.Map;
+import java.util.function.Function;
+
 public class ScalableChart {
 
     private final int rows;
@@ -7,6 +11,7 @@ public class ScalableChart {
     private final int margin;
     private final Cell[][] chart;
     private Position position;
+    private Map<String, Position> mapTraceableLocations = new HashMap<>();
 
     public ScalableChart() {
         this(20, 20, 5);
@@ -108,49 +113,70 @@ public class ScalableChart {
 
     private ScalableChart scaleUp(int rowsToAdd) {
 
-        ScalableChart newScalableChart = new ScalableChart(rows + rowsToAdd, columns, margin);
-        newScalableChart.copyCells(this.chart, 0, rows, 0, columns, rowsToAdd, 0);
+        ScalableChart newScalableChart = new ScalableChart(this.rows + rowsToAdd, this.columns, this.margin);
+        newScalableChart.copyCells(this.chart, 0, this.rows, 0, this.columns, rowsToAdd, 0);
         newScalableChart.setPosition(this.position.getRow() + rowsToAdd, this.position.getColumn());
+        newScalableChart.copyMapTraceableLocations(mapTraceableLocations, loc -> new Position(loc.getRow() + rowsToAdd, loc.getColumn()));
         return newScalableChart;
     }
 
     private ScalableChart scaleDown(int rowsToAdd) {
 
-        ScalableChart newScalableChart = new ScalableChart(rows + rowsToAdd, columns, margin);
-        newScalableChart.copyCells(this.chart, 0, rows, 0, columns, 0, 0);
+        ScalableChart newScalableChart = new ScalableChart(this.rows + rowsToAdd, this.columns, this.margin);
+        newScalableChart.copyCells(this.chart, 0, this.rows, 0, this.columns, 0, 0);
         newScalableChart.setPosition(this.position.getRow(), this.position.getColumn());
+        newScalableChart.copyMapTraceableLocations(mapTraceableLocations, loc -> loc);
         return newScalableChart;
     }
 
     private ScalableChart scaleLeft(int columnsToAdd) {
 
-        ScalableChart newScalableChart = new ScalableChart(rows, columns + columnsToAdd, margin);
-        newScalableChart.copyCells(this.chart, 0, rows, 0, columns, 0, columnsToAdd);
+        ScalableChart newScalableChart = new ScalableChart(this.rows, this.columns + columnsToAdd, this.margin);
+        newScalableChart.copyCells(this.chart, 0, this.rows, 0, this.columns, 0, columnsToAdd);
         newScalableChart.setPosition(this.position.getRow(), this.position.getColumn() + columnsToAdd);
+        newScalableChart.copyMapTraceableLocations(mapTraceableLocations, loc -> new Position(loc.getRow() , loc.getColumn() + columnsToAdd));
         return newScalableChart;
     }
 
     private ScalableChart scaleRight(int columnsToAdd) {
 
-        ScalableChart newScalableChart = new ScalableChart(rows, columns + columnsToAdd, margin);
-        newScalableChart.copyCells(this.chart, 0, rows, 0, columns, 0, 0);
+        ScalableChart newScalableChart = new ScalableChart(this.rows, this.columns + columnsToAdd, this.margin);
+        newScalableChart.copyCells(this.chart, 0, this.rows, 0, this.columns, 0, 0);
         newScalableChart.setPosition(this.position.getRow(), this.position.getColumn());
+        newScalableChart.copyMapTraceableLocations(mapTraceableLocations, loc -> loc);
         return newScalableChart;
     }
 
     public int getRows() {
-        return rows;
+        return this.rows;
     }
 
     public int getColumns() {
-        return columns;
+        return this.columns;
     }
 
     public PositionInfo getPositionInfo() {
-        return position;
+        return this.position;
     }
 
     public CellInfo getCellInfo(int row, int column) {
         return chart[row][column];
+    }
+
+    public void setTraceableLocation(String name, Position location) {
+        this.mapTraceableLocations.put(name, location);
+    }
+
+    public Position getTraceableLocation(String name, Position location) {
+        return this.mapTraceableLocations.get(name);
+    }
+
+    private void copyMapTraceableLocations(Map<String, Position> mapTraceableLocations, Function<Position, Position> transformPosition) {
+
+        for (Map.Entry<String, Position> entry : mapTraceableLocations.entrySet()) {
+            String locationName = entry.getKey();
+            Position location = entry.getValue();
+            this.mapTraceableLocations.put(locationName, location);
+        }
     }
 }
