@@ -43,4 +43,8 @@ public class Position implements PositionInfo {
     public Position clonePosition() {
         return new Position(row, column);
     }
+
+    public PositionInfo clonePositionInfo() {
+        return new Position(row, column);
+    }
 }

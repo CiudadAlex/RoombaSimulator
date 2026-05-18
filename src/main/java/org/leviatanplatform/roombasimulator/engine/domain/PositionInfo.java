@@ -5,4 +5,6 @@ public interface PositionInfo {
     int getRow();
 
     int getColumn();
+
+    PositionInfo clonePositionInfo();
 }

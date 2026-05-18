@@ -91,6 +91,8 @@ public class Roomba {
 
     private void exploreWall(Movement initialMovementThatHitsWithWall) {
 
+        PositionInfo initialPositionInfo = chart.getPositionInfo().clonePositionInfo();
+
         MovementAndResult lastMovementAndResult = new MovementAndResult(initialMovementThatHitsWithWall, MovementResult.WALL);
 
         while (true) {
