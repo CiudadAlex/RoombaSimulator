@@ -29,14 +29,27 @@ public class Roomba {
         chart.stepCurrentPosition();
         chart.actuateCurrentPosition(radius);
 
-        exploreStraightLineUntilWall(Movement.UP);
-        exploreWall(Movement.UP);
-
-        Position position = new Position(chart.getPositionInfo());
-        boolean isFullyEncircled = ChartExplorer.checkIfPositionIsFullyEncircledByWall(position, chart);
-        System.out.println("isFullyEncircled = " + isFullyEncircled);
+        exploreUntilFullyEncircledByWall(Movement.UP);
 
         // FIXME check rectangles of void of action
+    }
+
+    private void exploreUntilFullyEncircledByWall(Movement initialMovement) {
+
+        boolean isFullyEncircled = false;
+        Movement currentMovement = initialMovement;
+
+        while (!isFullyEncircled) {
+
+            exploreStraightLineUntilWall(currentMovement);
+            exploreWall(currentMovement);
+
+            Position position = new Position(chart.getPositionInfo());
+            isFullyEncircled = ChartExplorer.checkIfPositionIsFullyEncircledByWall(position, chart);
+            currentMovement = currentMovement.getDextroRotatorySubsequent();
+        }
+
+        System.out.println("isFullyEncircled = " + isFullyEncircled);
     }
 
     private void move(Movement movement) {
