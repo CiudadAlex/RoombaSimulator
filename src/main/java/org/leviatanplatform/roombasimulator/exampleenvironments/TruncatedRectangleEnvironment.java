@@ -14,7 +14,7 @@ public class TruncatedRectangleEnvironment extends AbstractWallPositionsEnvironm
                 buildListPositionsWall(rows, columns, truncationLength));
     }
 
-    private static List<Position> buildListPositionsWall(int rows, int columns, int truncationLength) {
+    public static List<Position> buildListPositionsWall(int rows, int columns, int truncationLength) {
 
         int halfRows = rows / 2;
         int halfColumns = columns / 2;

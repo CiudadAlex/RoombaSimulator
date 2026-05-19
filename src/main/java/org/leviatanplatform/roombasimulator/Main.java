@@ -5,6 +5,7 @@ import org.leviatanplatform.roombasimulator.engine.domain.Environment;
 import org.leviatanplatform.roombasimulator.exampleenvironments.OpenEnvironment;
 import org.leviatanplatform.roombasimulator.exampleenvironments.RectangleEnvironment;
 import org.leviatanplatform.roombasimulator.exampleenvironments.TruncatedRectangleEnvironment;
+import org.leviatanplatform.roombasimulator.exampleenvironments.TruncatedRectangleWithIslandEnvironment;
 import org.leviatanplatform.roombasimulator.visualizer.RoombaVisualizer;
 
 import javax.swing.*;
@@ -33,6 +34,7 @@ public class Main {
         Environment openEnvironment = new OpenEnvironment();
         Environment rectangleEnvironment = new RectangleEnvironment(30, 30);
         Environment truncatedRectangleEnvironment = new TruncatedRectangleEnvironment(30, 30, 7);
+        Environment truncatedRectangleWithIslandEnvironment = new TruncatedRectangleWithIslandEnvironment(30, 30, 7, 6);
         return truncatedRectangleEnvironment;
     }
 }
