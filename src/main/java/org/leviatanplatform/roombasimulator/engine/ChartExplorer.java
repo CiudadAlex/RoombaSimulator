@@ -24,7 +24,7 @@ public class ChartExplorer {
 
             for (Position positionNotWall : setNotWallPositions) {
 
-                if (isPositionInChartEdge(position, chart)) {
+                if (isPositionInChartEdge(positionNotWall, chart)) {
                     return false;
                 }
 

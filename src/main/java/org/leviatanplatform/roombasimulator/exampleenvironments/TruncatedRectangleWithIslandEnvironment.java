@@ -9,7 +9,7 @@ import java.util.List;
 public class TruncatedRectangleWithIslandEnvironment extends AbstractWallPositionsEnvironment {
 
     public TruncatedRectangleWithIslandEnvironment(int rows, int columns, int truncationLength, int islandLength) {
-        super(new Position(0, islandLength + 3),
+        super(new Position(islandLength + 3, 0),
                 buildListPositionsWall(rows, columns, truncationLength, islandLength));
     }
 

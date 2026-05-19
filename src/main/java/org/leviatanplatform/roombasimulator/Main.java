@@ -35,6 +35,6 @@ public class Main {
         Environment rectangleEnvironment = new RectangleEnvironment(30, 30);
         Environment truncatedRectangleEnvironment = new TruncatedRectangleEnvironment(30, 30, 7);
         Environment truncatedRectangleWithIslandEnvironment = new TruncatedRectangleWithIslandEnvironment(30, 30, 7, 6);
-        return truncatedRectangleEnvironment;
+        return truncatedRectangleWithIslandEnvironment;
     }
 }
