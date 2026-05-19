@@ -159,6 +159,10 @@ public class ScalableChart {
         return this.position;
     }
 
+    public CellInfo getCellInfo(Position position) {
+        return getCellInfo(position.getRow(), position.getColumn());
+    }
+
     public CellInfo getCellInfo(int row, int column) {
         return chart[row][column];
     }

@@ -44,6 +44,12 @@ public class Position implements PositionInfo {
         return false;
     }
 
+    @Override
+    public int hashCode() {
+        String id = "" + row + "|" + column;
+        return id.hashCode();
+    }
+
     public Position clonePosition() {
         return new Position(row, column);
     }
