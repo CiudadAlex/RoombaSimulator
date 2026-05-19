@@ -32,6 +32,10 @@ public class Roomba {
         exploreStraightLineUntilWall(Movement.UP);
         exploreWall(Movement.UP);
 
+        Position position = new Position(chart.getPositionInfo());
+        boolean isFullyEncircled = ChartExplorer.checkIfPositionIsFullyEncircledByWall(position, chart);
+        System.out.println("isFullyEncircled = " + isFullyEncircled);
+
         // FIXME check rectangles of void of action
     }
 

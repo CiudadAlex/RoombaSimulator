@@ -18,13 +18,28 @@ public class ChartExplorer {
         Set<Position> setNotWallPositions = new HashSet<>();
         setNotWallPositions.add(initialPosition);
 
-        for (Position positionNotWall : setNotWallPositions) {
+        while (true) {
 
-            if (isPositionInChartEdge(position, chart)) {
-                return false;
+            List<Position> listNearbyIteration = new ArrayList<>();
+
+            for (Position positionNotWall : setNotWallPositions) {
+
+                if (isPositionInChartEdge(position, chart)) {
+                    return false;
+                }
+
+                List<Position> listNearby = getNearbyPositionsNotWall(chart, positionNotWall);
+                listNearbyIteration.addAll(listNearby);
             }
 
-            List<Position> listNearbyPositionsNotWall = getNearbyPositionsNotWall(chart, positionNotWall);
+            int numAllPositionsBefore = setNotWallPositions.size();
+            setNotWallPositions.addAll(listNearbyIteration);
+            int numAllPositionsAfter = setNotWallPositions.size();
+
+            if (numAllPositionsBefore == numAllPositionsAfter) {
+                // No more to add so finished search
+                break;
+            }
         }
 
         return true;
