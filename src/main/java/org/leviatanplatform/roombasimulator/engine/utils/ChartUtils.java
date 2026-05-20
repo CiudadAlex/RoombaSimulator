@@ -3,9 +3,40 @@ package org.leviatanplatform.roombasimulator.engine.utils;
 import org.leviatanplatform.roombasimulator.engine.domain.*;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class ChartUtils {
+
+    public static Set<Position> getAllPositionsInsideWallFromGivenPosition(Position position, ScalableChart chart) {
+
+        Position initialPosition = position.clonePosition();
+        Set<Position> setNotWallPositions = new HashSet<>();
+        setNotWallPositions.add(initialPosition);
+
+        while (true) {
+
+            List<Position> listNearbyIteration = new ArrayList<>();
+
+            for (Position positionNotWall : setNotWallPositions) {
+
+                List<Position> listNearby = getNearbyPositionsNotWall(chart, positionNotWall);
+                listNearbyIteration.addAll(listNearby);
+            }
+
+            int numAllPositionsBefore = setNotWallPositions.size();
+            setNotWallPositions.addAll(listNearbyIteration);
+            int numAllPositionsAfter = setNotWallPositions.size();
+
+            if (numAllPositionsBefore == numAllPositionsAfter) {
+                // No more to add so finished search
+                break;
+            }
+        }
+
+        return setNotWallPositions;
+    }
 
     public static boolean isPositionInChartEdge(Position position, ScalableChart chart) {
 

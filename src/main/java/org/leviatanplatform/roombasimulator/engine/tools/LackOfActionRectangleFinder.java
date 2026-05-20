@@ -3,12 +3,15 @@ package org.leviatanplatform.roombasimulator.engine.tools;
 import org.leviatanplatform.roombasimulator.engine.domain.Position;
 import org.leviatanplatform.roombasimulator.engine.domain.Rectangle;
 import org.leviatanplatform.roombasimulator.engine.domain.ScalableChart;
-
-import java.util.List;
+import org.leviatanplatform.roombasimulator.engine.utils.ChartUtils;
+import java.util.Set;
 
 public class LackOfActionRectangleFinder {
 
-    public static List<Rectangle> findRectangle(Position position, ScalableChart chart) {
+    public static Rectangle findBiggestRectangle(Position position, ScalableChart chart) {
+
+        Set<Position> setNotWallPositions = ChartUtils. getAllPositionsInsideWallFromGivenPosition(position, chart);
+
 
         // FIXME finish
         return null;
