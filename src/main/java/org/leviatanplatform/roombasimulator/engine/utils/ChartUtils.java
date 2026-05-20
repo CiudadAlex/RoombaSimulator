@@ -38,6 +38,26 @@ public class ChartUtils {
         return setNotWallPositions;
     }
 
+
+    public static boolean isRectangleNotActuated(Rectangle rectangle, ScalableChart chart) {
+
+        int rowMin = rectangle.getMinPosition().getRow();
+        int columnMin = rectangle.getMinPosition().getColumn();
+
+        int rowMax = rectangle.getMaxPosition().getRow();
+        int columnMax = rectangle.getMaxPosition().getColumn();
+
+        for (int r = rowMin; r <= rowMax; r++) {
+            for (int c = columnMin; c <= columnMax; c++) {
+                if (chart.getCellInfo(r, c).isActuated()) {
+                    return false;
+                }
+            }
+        }
+
+        return true;
+    }
+
     public static boolean isPositionInChartEdge(Position position, ScalableChart chart) {
 
         int rows = chart.getRows();

@@ -12,8 +12,10 @@ public class LackOfActionRectangleFinder {
 
     public static Rectangle findBiggestRectangle(Position position, ScalableChart chart) {
 
-        Set<Position> setNotWallPositions = ChartUtils. getAllPositionsInsideWallFromGivenPosition(position, chart);
+        Set<Position> setNotWallPositions = ChartUtils.getAllPositionsInsideWallFromGivenPosition(position, chart);
         List<Position> listNotActuatedPositions = setNotWallPositions.stream().filter(p -> !chart.getCellInfo(p).isActuated()).toList();
+
+        // ChartUtils.isRectangleNotActuated(Rectangle rectangle, ScalableChart chart)
 
         // FIXME finish
         return null;
