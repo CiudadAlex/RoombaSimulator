@@ -1,4 +1,4 @@
-package org.leviatanplatform.roombasimulator.engine;
+package org.leviatanplatform.roombasimulator.engine.tools;
 
 import org.leviatanplatform.roombasimulator.engine.domain.CellInfo;
 import org.leviatanplatform.roombasimulator.engine.domain.Movement;

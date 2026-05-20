@@ -1,6 +1,7 @@
 package org.leviatanplatform.roombasimulator.engine;
 
 import org.leviatanplatform.roombasimulator.engine.domain.*;
+import org.leviatanplatform.roombasimulator.engine.tools.ChartExplorer;
 
 public class Roomba {
 
