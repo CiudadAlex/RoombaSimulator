@@ -15,35 +15,27 @@ public class PathFinder {
 
     public static List<Movement> findPath(Position position1, Position position2, ScalableChart chart) {
 
-        // PositionAndPath
         PositionAndPath initialPositionAndPath = new PositionAndPath(position1.clonePosition(), new ArrayList<>());
         Set<PositionAndPath> setNotWallPositions = new HashSet<>();
         setNotWallPositions.add(initialPositionAndPath);
 
         while (true) {
 
-            List<Position> listNearbyIteration = new ArrayList<>();
+            List<PositionAndPath> listNearbyIteration = new ArrayList<>();
 
-            for (Position positionNotWall : setNotWallPositions) {
+            for (PositionAndPath positionNotWall : setNotWallPositions) {
 
-                List<Position> listNearby = ChartUtils.getNearbyPositionsNotWall(chart, positionNotWall);
+                List<PositionAndPath> listNearby = ChartUtils.getNearbyPositionAndPathNotWall(chart, positionNotWall);
                 listNearbyIteration.addAll(listNearby);
             }
 
-            int numAllPositionsBefore = setNotWallPositions.size();
-            setNotWallPositions.addAll(listNearbyIteration);
-            int numAllPositionsAfter = setNotWallPositions.size();
-
-            if (numAllPositionsBefore == numAllPositionsAfter) {
-                // No more to add so finished search
-                break;
+            for (PositionAndPath positionNotWall : listNearbyIteration) {
+                if (positionNotWall.getPosition().equals(position2)) {
+                    return positionNotWall.getPath();
+                }
             }
+
+            setNotWallPositions.addAll(listNearbyIteration);
         }
-
-
-
-        // FIXME finish
-
-        return null;
     }
 }
