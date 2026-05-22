@@ -2,6 +2,10 @@ package org.leviatanplatform.roombasimulator.engine;
 
 import org.leviatanplatform.roombasimulator.engine.domain.*;
 import org.leviatanplatform.roombasimulator.engine.tools.ChartExplorer;
+import org.leviatanplatform.roombasimulator.engine.tools.LackOfActionRectangleFinder;
+import org.leviatanplatform.roombasimulator.engine.tools.PathFinder;
+
+import java.util.List;
 
 public class Roomba {
 
@@ -31,10 +35,33 @@ public class Roomba {
         chart.actuateCurrentPosition(radius);
 
         exploreUntilFullyEncircledByWall(Movement.UP);
+        actuateInAllAreas();
+    }
 
-        // FIXME check rectangles of void of action (LackOfActionRectangleFinder.findBiggestRectangle(Position position, ScalableChart chart))
+    private void actuateInAllAreas() {
 
-        // FIXME use --- PathFinder.findPath(Position position1, Position position2, ScalableChart chart)
+        while (true) {
+
+            Position position = new Position(chart.getPositionInfo());
+            Rectangle biggestRectangle = LackOfActionRectangleFinder.findBiggestRectangle(position, chart);
+
+            List<Movement> path = PathFinder.findPath(position, biggestRectangle.getAllCorners(), chart);
+
+            followPath(path);
+            actuateInRectangle(biggestRectangle);
+        }
+    }
+
+    private void followPath(List<Movement> path) {
+
+        for (Movement movement : path) {
+            move(movement);
+        }
+    }
+
+    private void actuateInRectangle(Rectangle rectangle) {
+
+        // FIXME finish
     }
 
     private void exploreUntilFullyEncircledByWall(Movement initialMovement) {

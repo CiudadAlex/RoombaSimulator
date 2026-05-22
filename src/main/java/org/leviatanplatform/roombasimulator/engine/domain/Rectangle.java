@@ -1,5 +1,7 @@
 package org.leviatanplatform.roombasimulator.engine.domain;
 
+import java.util.List;
+
 public class Rectangle {
 
     private final Position minPosition;
@@ -26,6 +28,21 @@ public class Rectangle {
         int maxColumn = maxPosition.getColumn();
 
         return (maxRow - minRow + 1) * (maxColumn - minColumn + 1);
+    }
+
+    public List<Position> getAllCorners() {
+
+        int minRow = minPosition.getRow();
+        int minColumn = minPosition.getColumn();
+        int maxRow = maxPosition.getRow();
+        int maxColumn = maxPosition.getColumn();
+
+        return List.of(
+                minPosition.clonePosition(),
+                maxPosition.clonePosition(),
+                new Position(minRow, maxColumn),
+                new Position(maxRow, minColumn)
+        );
     }
 
     public Rectangle expand(boolean rowOrColumn, boolean minOrMax) {
