@@ -67,9 +67,31 @@ public class Roomba {
 
     private void actuateInRectangle(Rectangle rectangle) {
 
-        Position position = new Position(chart.getPositionInfo());
+        Position center = rectangle.getCenter();
+        int height = rectangle.getHeight();
+        int width = rectangle.getWidth();
+
+        actuateHorizontalInRectangle(center, width);
 
         // FIXME finish
+    }
+
+    private void actuateHorizontalInRectangle(Position center, int width) {
+
+        Position position = new Position(chart.getPositionInfo());
+
+        if (position.getColumn() < center.getColumn()) {
+            moveStraightLine(Movement.RIGHT, width - 1);
+        } else {
+            moveStraightLine(Movement.LEFT, width - 1);
+        }
+    }
+
+    private void moveStraightLine(Movement movement, int times) {
+
+        for (int i = 0; i < times; i++) {
+            move(movement);
+        }
     }
 
     private void exploreUntilFullyEncircledByWall(Movement initialMovement) {

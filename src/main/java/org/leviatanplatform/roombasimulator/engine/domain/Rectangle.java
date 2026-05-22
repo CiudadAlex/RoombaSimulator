@@ -21,13 +21,33 @@ public class Rectangle {
     }
 
     public int getArea() {
+        return getHeight() * getWidth();
+    }
+
+    public int getHeight() {
+
+        int minRow = minPosition.getRow();
+        int maxRow = maxPosition.getRow();
+
+        return maxRow - minRow + 1;
+    }
+
+    public int getWidth() {
+
+        int minColumn = minPosition.getColumn();
+        int maxColumn = maxPosition.getColumn();
+
+        return maxColumn - minColumn + 1;
+    }
+
+    public Position getCenter() {
 
         int minRow = minPosition.getRow();
         int minColumn = minPosition.getColumn();
         int maxRow = maxPosition.getRow();
         int maxColumn = maxPosition.getColumn();
 
-        return (maxRow - minRow + 1) * (maxColumn - minColumn + 1);
+        return new Position((maxRow + minRow)/2, (maxColumn + minColumn)/2);
     }
 
     public List<Position> getAllCorners() {
