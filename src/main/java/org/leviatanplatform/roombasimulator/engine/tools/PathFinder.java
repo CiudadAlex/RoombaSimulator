@@ -13,9 +13,10 @@ import java.util.Set;
 
 public class PathFinder {
 
-    public static List<Movement> findPath(Position position1, Position position2, ScalableChart chart) {
+    /** Finds the first path found from positionStart to one of the positions in the list listPositionEnd  */
+    public static List<Movement> findPath(Position positionStart, List<Position> listPositionEnd, ScalableChart chart) {
 
-        PositionAndPath initialPositionAndPath = new PositionAndPath(position1.clonePosition(), new ArrayList<>());
+        PositionAndPath initialPositionAndPath = new PositionAndPath(positionStart.clonePosition(), new ArrayList<>());
         Set<PositionAndPath> setNotWallPositions = new HashSet<>();
         setNotWallPositions.add(initialPositionAndPath);
 
@@ -30,7 +31,7 @@ public class PathFinder {
             }
 
             for (PositionAndPath positionNotWall : listNearbyIteration) {
-                if (positionNotWall.getPosition().equals(position2)) {
+                if (listPositionEnd.contains(positionNotWall.getPosition())) {
                     return positionNotWall.getPath();
                 }
             }
