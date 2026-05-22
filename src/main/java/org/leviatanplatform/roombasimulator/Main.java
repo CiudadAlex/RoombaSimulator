@@ -38,7 +38,7 @@ public class Main {
         Environment rectEnv = new RectangleEnvironment(30, 30);
         Environment truncEnv = new TruncatedRectangleEnvironment(30, 30, 7);
         Environment truncIslandEnv = new TruncatedRectangleWithIslandEnvironment(30, 30, 7, 6);
-        Environment truncIslandEnvBig = new TruncatedRectangleWithIslandEnvironment(60, 60, 7, 6);
+        Environment truncIslandEnvBig = new TruncatedRectangleWithIslandEnvironment(100, 100, 10, 10);
         return truncIslandEnvBig;
     }
 }
