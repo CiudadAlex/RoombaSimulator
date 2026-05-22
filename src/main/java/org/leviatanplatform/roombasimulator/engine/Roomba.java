@@ -85,14 +85,14 @@ public class Roomba {
 
         while(heightLeft > radius) {
             moveStraightLine(verticalMovement, radius);
-            heightLeft = heightLeft - radius;
             actuateHorizontalInRectangle(center, width);
+            heightLeft = heightLeft - radius;
         }
 
-        moveStraightLine(verticalMovement, heightLeft);
-        actuateHorizontalInRectangle(center, width);
-
-        // FIXME finish
+        if(heightLeft > 0) {
+            moveStraightLine(verticalMovement, heightLeft);
+            actuateHorizontalInRectangle(center, width);
+        }
     }
 
     private void actuateHorizontalInRectangle(Position center, int width) {
