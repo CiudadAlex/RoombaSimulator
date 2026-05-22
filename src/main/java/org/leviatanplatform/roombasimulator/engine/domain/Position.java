@@ -31,6 +31,14 @@ public class Position implements PositionInfo {
         }
     }
 
+    public void addToRow(int numberToAdd) {
+        row = row + numberToAdd;
+    }
+
+    public void addToColumn(int numberToAdd) {
+        column = column + numberToAdd;
+    }
+
     @Override
     public boolean equals(Object obj) {
 

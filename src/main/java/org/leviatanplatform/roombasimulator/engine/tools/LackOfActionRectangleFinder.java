@@ -48,7 +48,10 @@ public class LackOfActionRectangleFinder {
 
     private static Rectangle tryIncreaseSizeInAllDirections(Rectangle rectangle, ScalableChart chart) {
 
-        // ChartUtils.isRectangleNotActuated(Rectangle rectangle, ScalableChart chart)
+        Rectangle currentRectangle = rectangle.expand(true, true);
+
+        boolean rectangleNotActuated = ChartUtils.isRectangleNotActuated(currentRectangle, chart);
+
         // FIXME finish
         return null;
     }
