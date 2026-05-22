@@ -32,9 +32,9 @@ public class Roomba {
 
         exploreUntilFullyEncircledByWall(Movement.UP);
 
-        // FIXME check rectangles of void of action (LackOfActionRectangleFinder)
+        // FIXME check rectangles of void of action (LackOfActionRectangleFinder.findBiggestRectangle(Position position, ScalableChart chart))
 
-        // PathFinder.findPath(Position position1, Position position2, ScalableChart chart)
+        // FIXME use --- PathFinder.findPath(Position position1, Position position2, ScalableChart chart)
     }
 
     private void exploreUntilFullyEncircledByWall(Movement initialMovement) {

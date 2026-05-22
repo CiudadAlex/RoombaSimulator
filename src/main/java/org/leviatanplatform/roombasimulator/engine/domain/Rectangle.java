@@ -17,4 +17,14 @@ public class Rectangle {
     public Position getMaxPosition() {
         return maxPosition;
     }
+
+    public int getArea() {
+
+        int minRow = minPosition.getRow();
+        int minColumn = minPosition.getColumn();
+        int maxRow = maxPosition.getRow();
+        int maxColumn = maxPosition.getColumn();
+
+        return (maxRow - minRow + 1) * (maxColumn - minColumn + 1);
+    }
 }
