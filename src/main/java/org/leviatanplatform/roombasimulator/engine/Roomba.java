@@ -50,6 +50,8 @@ public class Roomba {
             followPath(path);
             actuateInRectangle(biggestRectangle);
         }
+
+        // FIXME know when it is done
     }
 
     private void followPath(List<Movement> path) {
