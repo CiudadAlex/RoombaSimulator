@@ -36,6 +36,8 @@ public class Roomba {
 
         exploreUntilFullyEncircledByWall(Movement.UP);
         actuateInAllAreas();
+
+        System.out.println("Actuation finished");
     }
 
     private void actuateInAllAreas() {
@@ -45,13 +47,15 @@ public class Roomba {
             Position position = new Position(chart.getPositionInfo());
             Rectangle biggestRectangle = LackOfActionRectangleFinder.findBiggestRectangle(position, chart);
 
+            if (biggestRectangle == null) {
+                break;
+            }
+
             List<Movement> path = PathFinder.findPath(position, biggestRectangle.getAllCorners(), chart);
 
             followPath(path);
             actuateInRectangle(biggestRectangle);
         }
-
-        // FIXME know when it is done
     }
 
     private void followPath(List<Movement> path) {
@@ -62,6 +66,8 @@ public class Roomba {
     }
 
     private void actuateInRectangle(Rectangle rectangle) {
+
+        Position position = new Position(chart.getPositionInfo());
 
         // FIXME finish
     }
