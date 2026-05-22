@@ -47,6 +47,7 @@ public class RoombaVisualizer implements MovementListener {
 
     public void zoom(int pixelsToAdd) {
         pixelCanvas.addToPixelScale(pixelsToAdd);
+        resetCanvas();
         refreshAll();
     }
 
@@ -68,6 +69,12 @@ public class RoombaVisualizer implements MovementListener {
 
     private void refreshAll() {
         paintCanvas();
+    }
+
+    public void resetCanvas() {
+        SwingUtilities.invokeLater(() -> {
+            pixelCanvas.reset();
+        });
     }
 
     public void paintCanvas() {

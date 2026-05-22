@@ -8,8 +8,12 @@ public class PixelCanvas extends JPanel {
 
     private BufferedImage canvas;
     private int pixelScale;
+    private int w;
+    private int h;
 
     public PixelCanvas(int w, int h, int pixelScale) {
+        this.w = w;
+        this.h = h;
         this.pixelScale = pixelScale;
         this.canvas = new BufferedImage(w, h, BufferedImage.TYPE_INT_RGB);
     }
@@ -20,6 +24,14 @@ public class PixelCanvas extends JPanel {
 
         g.setColor(color);
         g.fillRect(x * pixelScale, y * pixelScale, pixelScale, pixelScale);
+    }
+
+    public void reset() {
+
+        Graphics2D g = this.canvas.createGraphics();
+
+        g.setColor(Color.BLACK);
+        g.fillRect(0, 0, w, h);
     }
 
     public void addToPixelScale(int pixelsToAdd) {
