@@ -31,7 +31,7 @@ public class Main {
     }
 
     // FIXME zoomout not working automatically
-    // FIXME consider possible wall always even cleaning
+    // FIXME consider possible wall always even cleaning (throw exception, paint wall and resume task)
 
     private static Environment getEnvironment() {
         Environment openEnv = new OpenEnvironment();
