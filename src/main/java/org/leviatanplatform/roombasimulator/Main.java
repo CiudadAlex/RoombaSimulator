@@ -30,11 +30,15 @@ public class Main {
         });
     }
 
+    // FIXME zoomout not working automatically
+    // FIXME consider possible wall always even cleaning
+
     private static Environment getEnvironment() {
-        Environment openEnvironment = new OpenEnvironment();
-        Environment rectangleEnvironment = new RectangleEnvironment(30, 30);
-        Environment truncatedRectangleEnvironment = new TruncatedRectangleEnvironment(30, 30, 7);
-        Environment truncatedRectangleWithIslandEnvironment = new TruncatedRectangleWithIslandEnvironment(30, 30, 7, 6);
-        return truncatedRectangleWithIslandEnvironment;
+        Environment openEnv = new OpenEnvironment();
+        Environment rectEnv = new RectangleEnvironment(30, 30);
+        Environment truncEnv = new TruncatedRectangleEnvironment(30, 30, 7);
+        Environment truncIslandEnv = new TruncatedRectangleWithIslandEnvironment(30, 30, 7, 6);
+        Environment truncIslandEnvBig = new TruncatedRectangleWithIslandEnvironment(60, 60, 7, 6);
+        return truncIslandEnvBig;
     }
 }
