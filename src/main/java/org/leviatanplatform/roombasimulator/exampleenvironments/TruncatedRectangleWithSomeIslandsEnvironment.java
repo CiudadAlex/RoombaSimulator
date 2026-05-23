@@ -18,8 +18,13 @@ public class TruncatedRectangleWithSomeIslandsEnvironment extends AbstractWallPo
         int islandHalf = islandLength/2;
 
         List<Position> listWallPositions = TruncatedRectangleEnvironment.buildListPositionsWall(rows, columns, truncationLength);
-        listWallPositions.addAll(WallRectangle.generateWallRectangle(islandHalf, -islandHalf, -2 * islandHalf, -islandHalf));
-        listWallPositions.addAll(WallRectangle.generateWallRectangle(islandHalf, -islandHalf, islandHalf, 2 * islandHalf));
+
+        listWallPositions.addAll(WallRectangle.generateWallRectangle(3 * islandHalf, islandHalf, -3 * islandHalf, -islandHalf));
+        listWallPositions.addAll(WallRectangle.generateWallRectangle(3 * islandHalf, islandHalf, islandHalf, 3 * islandHalf));
+
+        listWallPositions.addAll(WallRectangle.generateWallRectangle(-islandHalf, -3 * islandHalf, -3 * islandHalf, -islandHalf));
+        listWallPositions.addAll(WallRectangle.generateWallRectangle(-islandHalf, -3 * islandHalf, islandHalf, 3 * islandHalf));
+
         return listWallPositions;
     }
 

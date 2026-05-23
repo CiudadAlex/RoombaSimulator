@@ -27,8 +27,6 @@ public class Main {
         });
     }
 
-    // FIXME consider possible wall always even cleaning (throw exception, paint wall and resume task)
-
     private static Environment getEnvironment() {
         Environment openEnv = new OpenEnvironment();
         Environment rectEnv = new RectangleEnvironment(30, 30);
