@@ -1,6 +1,7 @@
 package org.leviatanplatform.roombasimulator.engine;
 
 import org.leviatanplatform.roombasimulator.engine.domain.*;
+import org.leviatanplatform.roombasimulator.engine.exception.WallFoundException;
 import org.leviatanplatform.roombasimulator.engine.tools.ChartExplorer;
 import org.leviatanplatform.roombasimulator.engine.tools.LackOfActionRectangleFinder;
 import org.leviatanplatform.roombasimulator.engine.tools.PathFinder;
@@ -153,7 +154,7 @@ public class Roomba {
         }
     }
 
-    public MovementResult exploreMove(Movement movement) {
+    public MovementResult exploreMove(Movement movement, boolean throwIfWall) {
 
         MovementResult movementResult = env.tryToMove(movement);
 
@@ -162,6 +163,10 @@ public class Roomba {
             case SUCCESS -> move(movement);
         };
 
+        if (throwIfWall && MovementResult.WALL.equals(movementResult)) {
+            throw new WallFoundException();
+        }
+
         return movementResult;
     }
 
@@ -169,7 +174,7 @@ public class Roomba {
 
         while (true) {
 
-            MovementResult movementResult = exploreMove(movement);
+            MovementResult movementResult = exploreMove(movement, false);
 
             if (movementResult == MovementResult.WALL) {
                 break;
@@ -192,7 +197,7 @@ public class Roomba {
 
         Movement movement = movementAndResult.getMovement();
         Movement movementSideways = getMovementSideways(movement, inverse);
-        MovementResult movementResult = exploreMove(movementSideways);
+        MovementResult movementResult = exploreMove(movementSideways, false);
         return new MovementAndResult(movementSideways, movementResult);
     }
 

@@ -52,7 +52,7 @@ public class RoombaVisualizer implements MovementListener {
     }
 
     public void moveRoomba(Movement movement) {
-        roomba.exploreMove(movement);
+        roomba.exploreMove(movement, false);
         changePixelScaleIfNeeded();
         refreshAll();
     }
