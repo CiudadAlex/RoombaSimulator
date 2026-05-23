@@ -78,8 +78,7 @@ public class Roomba {
     private void followPath(List<Movement> path) {
 
         for (Movement movement : path) {
-            // FIXME aaaaaa
-            move(movement);
+            exploreMove(movement, true);
         }
     }
 
@@ -127,8 +126,7 @@ public class Roomba {
     private void moveStraightLine(Movement movement, int times) {
 
         for (int i = 0; i < times; i++) {
-            // FIXME aaa
-            move(movement);
+            exploreMove(movement, true);
         }
     }
 
