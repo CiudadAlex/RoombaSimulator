@@ -47,7 +47,14 @@ public class Roomba {
 
         while (!doneAll) {
 
-            doneAll = findBiggestRectangleAndActuateInItReturnTrueIfThereAreNoMore();
+            try {
+                doneAll = findBiggestRectangleAndActuateInItReturnTrueIfThereAreNoMore();
+
+            } catch(WallFoundException wfe) {
+                Movement movementThatHitTheWall = wfe.getMovementThatHitTheWall();
+                exploreUntilFullyEncircledByWall(movementThatHitTheWall);
+                doneAll = false;
+            }
         }
     }
 
@@ -71,6 +78,7 @@ public class Roomba {
     private void followPath(List<Movement> path) {
 
         for (Movement movement : path) {
+            // FIXME aaaaaa
             move(movement);
         }
     }
@@ -119,6 +127,7 @@ public class Roomba {
     private void moveStraightLine(Movement movement, int times) {
 
         for (int i = 0; i < times; i++) {
+            // FIXME aaa
             move(movement);
         }
     }
@@ -164,7 +173,7 @@ public class Roomba {
         };
 
         if (throwIfWall && MovementResult.WALL.equals(movementResult)) {
-            throw new WallFoundException();
+            throw new WallFoundException(movement);
         }
 
         return movementResult;
