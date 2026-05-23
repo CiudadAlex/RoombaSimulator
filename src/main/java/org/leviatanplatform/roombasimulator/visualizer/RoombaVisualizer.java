@@ -64,6 +64,7 @@ public class RoombaVisualizer implements MovementListener {
 
         if (rows * pixelScale > h || columns * pixelScale > w) {
             pixelCanvas.addToPixelScale(-1);
+            resetCanvas();
         }
     }
 
@@ -157,6 +158,7 @@ public class RoombaVisualizer implements MovementListener {
             throw new RuntimeException(e);
         }
 
+        changePixelScaleIfNeeded();
         refreshAll();
     }
 }
