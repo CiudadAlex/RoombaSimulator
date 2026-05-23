@@ -42,20 +42,29 @@ public class Roomba {
 
     private void actuateInAllAreas() {
 
-        while (true) {
+        boolean doneAll = false;
 
-            Position position = new Position(chart.getPositionInfo());
-            Rectangle biggestRectangle = LackOfActionRectangleFinder.findBiggestRectangle(position, chart);
+        while (!doneAll) {
 
-            if (biggestRectangle == null) {
-                break;
-            }
-
-            List<Movement> path = PathFinder.findPath(position, biggestRectangle.getAllCorners(), chart);
-
-            followPath(path);
-            actuateInRectangle(biggestRectangle);
+            doneAll = findBiggestRectangleAndActuateInItReturnTrueIfThereAreNoMore();
         }
+    }
+
+    private boolean findBiggestRectangleAndActuateInItReturnTrueIfThereAreNoMore() {
+
+        Position position = new Position(chart.getPositionInfo());
+        Rectangle biggestRectangle = LackOfActionRectangleFinder.findBiggestRectangle(position, chart);
+
+        if (biggestRectangle == null) {
+            return true;
+        }
+
+        List<Movement> path = PathFinder.findPath(position, biggestRectangle.getAllCorners(), chart);
+
+        followPath(path);
+        actuateInRectangle(biggestRectangle);
+
+        return false;
     }
 
     private void followPath(List<Movement> path) {
